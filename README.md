@@ -29,3 +29,85 @@ Serverless may be a way in which this can be done, but it is only on the executi
 - Node.js
 - Serverless framework (code as infrastructure).
 - AWS credentials.
+
+## Serverless function
+
+```
+/**
+ * @param {*} event information about the event that triggers the function if its an API it will contain body, headers, stringParams, pathParams ...
+ * @param {*} context of the running function, not used often, time to time remaining to complete function if timeout
+ * @param {*} callback sends the response
+ */
+const helloWorld = (event, context, callback) => {
+	console.log(`I'm running on environment: ${process.env.ENV}`);
+	console.log(`Event: ${event}`);
+	console.log(`Hello ${event.pathParameters.name}`);
+	const response = {
+		statusCode: 200,
+		body: JSON.stringify({ succes: true })
+	};
+	console.log(response);
+	callback(null, response);
+};
+
+const sum = (event, context, callback) => {
+	console.log(`Event: ${JSON.stringify(event)}`);
+	const body = JSON.parse(event.body);
+	const result = body.a + body.b;
+	const response = {
+		statusCode: 200,
+		body: JSON.stringify({result})
+	};
+	console.log(response);
+	callback(null, response);
+}
+
+module.exports = {
+	helloWorld,
+	sum
+};
+```
+
+## Serverles YML
+
+Care with syntax
+
+```
+service: node-aws-test
+
+provider:
+  name: aws
+  stage: development
+  runtime: nodejs12.x
+  timeout: 10
+  memory: 128
+
+
+functions:
+  helloWorld:
+    handler: index.helloWorld
+    description: Hello world function
+    environment:
+      ENV: development
+    events:
+      - http:
+          path: /{name}
+          method: GET
+          cors: true
+  sum:
+    handler: index.sum
+    description: Sum function
+    events:
+      - http:
+          path: /suma
+          method: POST
+          cors: true
+          private: true
+
+plugins:
+  - serverless-offline
+```
+
+## Layers
+
+Allows us to cache or share files between the different lambdas we have. It is useful for handling very large files that are not updated very often.

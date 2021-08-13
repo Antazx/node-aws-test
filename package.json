@@ -1,0 +1,23 @@
+{
+  "name": "node-aws-test",
+  "version": "1.0.0",
+  "description": "Serverless computing is an execution model in which the provider in the cloud (AWS, Google Cloud or Azure) is responsible for executing a piece of code by dynamically allocating resources. And charging only for the amount of resources used to execute the code. The code, generically, sits inside stateless containers that can be triggered by a variety of events.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Antazx/node-aws-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Antazx/node-aws-test/issues"
+  },
+  "homepage": "https://github.com/Antazx/node-aws-test#readme",
+  "devDependencies": {
+    "serverless-offline": "^8.0.0"
+  }
+}
