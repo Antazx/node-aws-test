@@ -1,0 +1,36 @@
+Mappings:
+  MappingName:
+    TopLevelKey:
+      SecondLevelKey:
+  Enviroments:
+    Dev:
+      Port: 0000
+      Debug: true
+      ...
+    Prod:
+      Port: 1111
+      Debug: false
+      ...
+
+Resources:
+  TestResource:
+    Type: service-provider::service-name::data-type-name
+    Condition: CreateProdResources
+    Properties:
+      AdditienalInfo: String
+      ...
+  Parameters:
+    ParameterName:
+      Description: Description of the service
+      Type: String
+    ParameterConfigThingsLikelyToChange:
+      Description:
+      Type: 
+Conditions:
+  CreateProdResources: !Equals [ !Ref EnvType, prod ]
+Outputs:
+  OutputExample:
+    Description:
+      Value: !Ref SomethingReferenced
+      Export:
+        Name: TestOutputExample

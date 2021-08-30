@@ -1,0 +1,7 @@
+Resources:
+  MyBlabla:
+    Type: Test
+    Properties:
+      ...
+      ImportedFromOtherYML:
+        - !ImportValue TestOutputExample

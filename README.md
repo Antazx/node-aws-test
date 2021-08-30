@@ -107,6 +107,50 @@ functions:
 plugins:
   - serverless-offline
 ```
+To describe an array we use `-` on child elements.
+
+### Resources:
+
+They represent AWS services, they have Type, Properties and Parameteres
+`!Ref` it's a function that allows us to reference parameters or resources
+
+### Parameters:
+
+Used to store configurations that are likely to change in the future so we don't need to modify the resource structure
+
+### Mappings:
+
+Fixed variables, very handi to differentieate beween different enviroments (dev vs prod), regions (AWS regions) etc.
+We can "call" a mapping with `!FindInMap [MapName, TopLevelKey, SecondLevelKey]`
+
+### Outputs:
+
+*Optional* outputs values that we can importa into other stacks (if you export them first). It allow to link CloudFormation templates. You can't delete a CloudFormation Stack if it's output is being referenced by another CoudFormation Stack
+
+### Conditions:
+
+Used to control the creation of resources or outputs based on a condition. If Dev/Prod ... we have some logical functions:
+
+- !And
+- !Equals
+- !If
+- !Not
+- !Or
+
+### Intrinsic Functions:
+
+- !Ref:
+  - Parameters: returns the value of the parameter
+  - Resources: returns the physical ID of the underlying resource
+- !GetAtt
+- !FindInMap
+- !ImportValue
+- !Join
+- !Sub
+- Conditional functions
+
+### Rollbacks:
+### ChangeSewts, Nested Stacks & StackSet:
 
 ## Layers
 
